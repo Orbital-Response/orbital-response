@@ -144,7 +144,7 @@ if st.session_state.get("predict_ready"):
         for box in boxes:
             cls = int(box.cls)
             xyxy = box.xyxy[0].tolist()
-            color = (0, 255, 0, 80) if cls == 0 else (255, 0, 0, 100)
+            color = (255, 0, 0, 100) if cls == 0 else (0, 255, 0, 80)
             draw.rectangle(xyxy, fill=color)
     final_image = Image.alpha_composite(base_rgba, overlay)
     output_path = Path("images_masks/masks/yolo_output.png")
