@@ -1,4 +1,5 @@
 import streamlit as st
+import base64
 import numpy as np
 import sys
 import os
@@ -21,11 +22,7 @@ from ml_logic.model.model import get_model_destruction
 from goog_static_map_api import google_api
 # Importing MapBox API
 from mapbox_api import mapbox_api
-#Importing img_transform and model module
-#from ml_logic.model.model import get_model, get_model_destruction
 #load_dotenv()
-# google_api_key = os.getenv("GOOGLE_API_KEY")
-#google_api_key = 'AIzaSyAz4skeLv37RPY2flqyUbnk6WU384yJvUA'
 google_api_key = os.environ.get("GOOGLE_API_KEY")
 # Dictionary of Warzones
 warzone = {
@@ -46,6 +43,59 @@ region_centers = {
 # STREAMLIT CONFIG & GLOBAL STYLE
 # -----------------------------------------------------------------------------
 st.set_page_config(layout="wide")
+
+banner_path = Path("presentation_images/gaza_banner.png")  # Adjust if necessary
+
+if banner_path.exists():
+    with open(banner_path, "rb") as img_file:
+        b64_encoded = base64.b64encode(img_file.read()).decode()
+    banner_url = f"data:image/png;base64,{b64_encoded}"
+else:
+    st.warning("Gaza banner image not found.")
+    banner_url = ""
+
+st.markdown(f"""
+    <style>
+    .thin-banner {{
+        position: relative;
+        width: 100vw;
+        left: 50%;
+        margin-left: -50vw;
+        background-image: url('{banner_url}');
+        background-size: cover;
+        background-position: center;
+        height: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }}
+    .thin-banner::before {{
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background-color:   rgba(0, 0, 0, 0.4); /* dark overlay */
+        z-index: 0;
+    }}
+    .thin-banner h1 {{
+        z-index: 1;
+        color: white !important; /* force white text */
+        font-size: 4rem;
+        margin: 0;
+        position: relative;
+    }}
+    </style>
+
+    <div class="thin-banner">
+        <h1>Orbital Response AI</h1>
+    </div>
+""", unsafe_allow_html=True)
+
+
+
+
 st.markdown(
     """
     <style>
@@ -61,7 +111,7 @@ st.markdown(
 # -----------------------------------------------------------------------------
 # SIDEBAR
 # -----------------------------------------------------------------------------
-st.sidebar.header("Choose Region")
+st.sidebar.header("Location Selector:")
 region = st.sidebar.selectbox("List of Regions", list(region_centers.keys()))
 st.sidebar.markdown("**Or use the search bar below:**")
 search_query = st.sidebar.text_input("Search Location")
@@ -83,10 +133,9 @@ if search_query:
     except Exception as e:
         st.sidebar.error(f"Error: {e}")
 # -----------------------------------------------------------------------------
-# MAP SECTION
+# MAP SECTION + HANDLE MAP CLICK (aligned)
 # -----------------------------------------------------------------------------
 # Determine map center
-st.markdown("<h1 style='text-align: center;'>Orbital Response AI</h1>", unsafe_allow_html=True)
 if search_coords:
     lat, lon = search_coords
     map_title = f"Map of: {search_query}"
@@ -96,39 +145,61 @@ elif region != "-":
 else:
     st.warning("Please select a region or search for a location.")
     st.stop()
-# Wrap map into centred column layout
-left_spacer, map_col, right_spacer = st.columns([1, 2, 1])
+
+# Define columns to align map and selected location info
+left_spacer, map_col, info_col, right_spacer = st.columns([0.5, 2, 1.2, 0.3])
+
 with map_col:
     st.subheader(map_title)
-    m = folium.Map(location=[lat, lon], zoom_start=6 if search_coords else 4)
+    st.markdown("<p style='text-align: left; font-style: italic; color: #555;'>Select specific location</p>", unsafe_allow_html=True)
+    m = folium.Map(location=[lat, lon], zoom_start=10 if search_coords else 4)
     folium.LatLngPopup().add_to(m)
     map_data = st_folium(m, width=700, height=500)
-# -----------------------------------------------------------------------------
-# HANDLE MAP CLICK & SHOW SATELLITE IMAGES
-# -----------------------------------------------------------------------------
-with right_spacer:
+
+with info_col:
+    # Add vertical space to align top with the map column
+    st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+
     if map_data.get("last_clicked"):
-        st.subheader(" ")
         clicked_lat = map_data["last_clicked"]["lat"]
         clicked_lon = map_data["last_clicked"]["lng"]
-        st.success(f"Clicked Location: Latitude: {clicked_lat:.5f}, Longitude: {clicked_lon:.5f}")
+        st.markdown(
+            f"""
+            <div style="background-color:#e6f2ff; padding:1rem; border-radius:10px; font-size:16px;">
+                <strong>Selected Location:</strong><br>
+                - Latitude: <code>{clicked_lat:.5f}</code><br>
+                - Longitude: <code>{clicked_lon:.5f}</code>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        st.markdown("<div style='margin-top: 1rem;'></div>", unsafe_allow_html=True)
         st.session_state["lat"] = clicked_lat
         st.session_state["lon"] = clicked_lon
-        if st.button("Fetch Satellite Images"):
+
+        if st.button("Retrieve Satellite Images"):
             mapbox_api(clicked_lat, clicked_lon)
             google_api(clicked_lat, clicked_lon)
             st.session_state["images_ready"] = True
             st.session_state["predict_ready"] = False  # reset
+
         if st.session_state.get("images_ready"):
             pre_image_path = Path("images_masks/satellite_images/pre_disaster.png")
             post_image_path = Path("images_masks/satellite_images/post_disaster.png")
-            if st.button("Predict"):
+            if st.button("Run Damage Prediction"):
                 st.session_state["predict_ready"] = True
-        # Fetch satellite imagery from APIs
+
         image_dir = Path.cwd() / "images_masks" / "satellite_images"
         pre_image_path = image_dir / "pre_disaster.png"
         post_image_path = image_dir / "post_disaster.png"
-        # Two columns right underneath the map with a SMALL gap to minimise whitespace
+    else:
+        # Empty container to preserve vertical alignment with the map
+        st.markdown(
+            "<div style='height: 200px;'></div>",
+            unsafe_allow_html=True
+        )
+
+
 #-----------------------------------------------------------------------------
 #___________________________YOLO Model____________________________#
 #-----------------------------------------------------------------------------
@@ -146,7 +217,7 @@ if st.session_state.get("predict_ready"):
         for box in boxes:
             cls = int(box.cls)
             xyxy = box.xyxy[0].tolist()
-            color = (255, 0, 0, 100) if cls == 0 else (0, 255, 0, 80)
+            color = (0, 255, 0, 80) if cls == 0 else (255, 0, 0, 100)
             draw.rectangle(xyxy, fill=color)
     final_image = Image.alpha_composite(base_rgba, overlay)
     output_path = Path("images_masks/masks/yolo_output.png")
@@ -163,7 +234,7 @@ if st.session_state.get("predict_ready"):
             label2="Post-Disaster",
             width=700)
     with col2:
-        st.subheader("Post-Disaster Focus")
+        st.subheader("Post-Disaster Destruction Mapping: Yolov11")
         image_comparison(
             img1=str(post_image_path),
             img2=str(yolo_mask_path),
@@ -235,5 +306,5 @@ if st.session_state.get("predict_ready"):
     final_img = Image.alpha_composite(post_img_rgba, overlay)
     left_spacer, Final_image, right_spacer = st.columns([1, 3, 1])
     with Final_image:
-        st.subheader("Our Model Prediction")
+        st.subheader("Destruction Mapping: U-Net (Orbital Response Model)")
         st.image(final_img)

@@ -13,7 +13,8 @@ def google_api(lat, lon):
     zoom = 17
     size= "512x512"
     scale= 2
-    api_key = os.getenv("GOOGLE_API_KEY")
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    #api_key = 'AIzaSyAz4skeLv37RPY2flqyUbnk6WU384yJvUA'
 
     url = (
         f"https://maps.googleapis.com/maps/api/staticmap?"

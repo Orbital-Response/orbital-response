@@ -49,7 +49,7 @@ slides = [
             *The largest, manually labelled, building damage assessment dataset*
 
             **18,336** high-resolution satellite images
-            **850,000** polygons covering over **45,000 km²**
+            **850,000** polygons    covering over **45,000 km²**
         """,
         "disaster_types": """
             - Earthquakes
@@ -91,7 +91,7 @@ slides = [
         "image_slider_after": "presentation_images/secondary_image_labelled.png"
     },
     {
-        "title": "The Models - U-Net",
+        "title": "Our Model - U-Net",
         "content": """
         **Semantic Segmentation** with a **U-Net CNN**
 
@@ -110,7 +110,7 @@ slides = [
 
     },
     {
-        "title": "The Models - YOLOv11-seg",
+        "title": "Alternative Model - YOLOv11-seg",
         "content": """
         **YOLOv11** family by **Ultralytics**, tailored for **instance segmentation**
 
@@ -124,7 +124,7 @@ slides = [
 ]
 
 # Sidebar for navigation
-st.sidebar.title("Presentation Slides")
+st.sidebar.title("Navigation")
 selected_title = st.sidebar.radio("Navigate to:", [slide["title"] for slide in slides])
 st.session_state.slide_index = [i for i, s in enumerate(slides) if s["title"] == selected_title][0]
 
@@ -192,7 +192,7 @@ elif current_slide['title'] == "Primary Data Source" and "image_paths" in curren
         except FileNotFoundError:
             st.warning("One or both xBD dataset images not found.")
 
-elif current_slide['title'] == "The Models - U-Net":
+elif current_slide['title'] == "Our Model - U-Net":
     # Create three columns: left (text + unet), divider, right (masks)
     left_col, divider_col, right_col = st.columns([1.4, 0.1, 0.55])
 
