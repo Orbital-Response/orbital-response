@@ -1,12 +1,4 @@
-import numpy as np
-
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torchvision.models as models
-
-from torchvision import transforms
-from torchvision.transforms import functional as TF
+from orbital_response.ml_logic.model.imports import *
 
 #------------------------- MODEL 1 ( BUILDING DETECTION ) ----------------------
 # Reinitialize encoder
@@ -120,4 +112,4 @@ def get_model(n_classes=1):
     return UNetModel(n_classes)
 
 def get_model_destruction(n_classes=1):
-    return UNetModel(n_classes)
+    return UNetModelDestruction(n_classes)
