@@ -81,14 +81,29 @@ st.markdown(f"""
 
 
 
+# Add mission statement content
 st.markdown("---")
+st.markdown("### **Our Mission**")
+st.markdown(
+"""
+**Harness the power of CNNs and high-frequency satellite imagery to optimise humanitarian aid distribution.**
 
-st.markdown("""<p style='text-align: center'>
-**Our Mission: Harness the power of CNNs and high-frequency satellite imagery to revolutionize humanitarian aid.""", unsafe_allow_html=True)
-st.markdown("""<p style='text-align: center'>
-High-quality, high-frequency satellite imagery is a novel resource. </p>""", unsafe_allow_html=True)
+High-resolution, high-frequency satellite imagery is an emerging and transformative resource. Today, we have access to imagery with resolutions below 0.5 meters per pixel and revisit intervals of less than five days. When combined with advances in artificial intelligence — particularly Convolutional Neural Networks (CNNs) — this unlocks new capabilities.
 
-st.markdown("<p style='text-align: center'>INSERT TEXT HERE</p>", unsafe_allow_html=True)
+Given today’s global socio-political climate, we chose to focus on humanitarian aid in conflict zones. Satellite imagery is playing an increasingly vital role in these contexts. Modern offensives often involve drone strikes, and their consequences — especially building destruction — are visible from space.
+
+By mapping the distribution and severity of this destruction, we can support a more optimized, data-driven approach to humanitarian aid delivery in affected regions.
+"""
+)
+st.markdown("---")
+st.markdown("### Project Repository")
+
+st.markdown(
+    """
+    You can explore the full codebase, datasets, and model architecture on our [https://github.com/benshaw0/orbital-response](#).
+    """,
+    unsafe_allow_html=True
+)
 st.write("")
 
 st.markdown("---")
@@ -97,7 +112,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 team_profiles = [
     {"name": "Ben Shaw", "url": "https://www.linkedin.com/in/bencshaw/", "img": "presentation_images/Ben.png"},
-    {"name": "Felix Pless", "url": "https://www.linkedin.com/in/felixpless/", "img": "presentation_images/felix.jpg"},
+    {"name": "Felix Pless", "url": "https://www.linkedin.com/in/felixpless/", "img": "presentation_images/Felix.jpg"},
     {"name": "Christian Miro", "url": "https://www.linkedin.com/in/christianmiro/", "img": "presentation_images/Christian.jpeg"},
 ]
 
