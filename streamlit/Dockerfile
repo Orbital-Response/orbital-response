@@ -19,4 +19,5 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 #CMD streamlit run app_ui_ben.py --port $PORT
 CMD ["sh", "-c", "streamlit run 0_Home.py --server.address 0.0.0.0 --server.port $PORT"]
+#CMD streamlit run app_ui_ben.py --port $PORT
 #CMD ["sh", "-c", "streamlit run app_ui_ben.py --server.address 0.0.0.0 --server.port ${PORT:-8501}"]
