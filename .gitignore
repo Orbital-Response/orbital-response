@@ -19,7 +19,5 @@ data/
 *.json
 *.geojson
 *.tif
-*.png
-*.jpg
 
 orbital_response/models/
