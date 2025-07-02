@@ -1,5 +1,5 @@
-from orbital_response.ml_logic.model.data_prep import * 
-from orbital_response.ml_logic.model.config import * 
+from orbital_response.ml_logic.model.data_prep import *
+from orbital_response.ml_logic.model.config import *
 from orbital_response.ml_logic.model.imports import *
 
 
@@ -17,7 +17,6 @@ train_secondary_dataset_damage = AugmentedSecondaryCropDatasetDamage(
     min_ratio=0.1
 )
 
-
 val_secondary_dataset = SecondaryDataset(root_dir="../data/filtered/data_secondary/split/val", mask_transform=mask_transform)
 val_secondary_dataset_damage = SecondaryDatasetDamage(root_dir="../data/filtered/data_secondary/split/val", mask_transform=mask_transform, include_building_mask=True)
 
@@ -26,31 +25,31 @@ test_secondary_dataset_damage = SecondaryDatasetDamage(root_dir="../data/filtere
 
 
 ############ Buildings detector dataloaders #########
-train_dataloader = DataLoader(train_secondary_dataset, 
-                              batch_size=BATCH_SIZE, 
+train_dataloader = DataLoader(train_secondary_dataset,
+                              batch_size=BATCH_SIZE,
                               shuffle=True,
-                              drop_last=True, 
+                              drop_last=True,
                               num_workers=num_workers)
-val_dataloader = DataLoader(val_secondary_dataset, 
-                            batch_size=BATCH_SIZE, 
+val_dataloader = DataLoader(val_secondary_dataset,
+                            batch_size=BATCH_SIZE,
                             shuffle=False,
                             num_workers=num_workers)
-test_dataloader = DataLoader(test_secondary_dataset, 
-                             batch_size=BATCH_SIZE, 
+test_dataloader = DataLoader(test_secondary_dataset,
+                             batch_size=BATCH_SIZE,
                              shuffle=False,
                              num_workers=num_workers)
 
 ############ Damage destruction detector dataloaders #########
-train_dataloader_damage = DataLoader(train_secondary_dataset_damage, 
-                              batch_size=BATCH_SIZE, 
+train_dataloader_damage = DataLoader(train_secondary_dataset_damage,
+                              batch_size=BATCH_SIZE,
                               shuffle=True,
-                              drop_last=True, 
+                              drop_last=True,
                               num_workers=num_workers)
-val_dataloader_damage = DataLoader(val_secondary_dataset_damage, 
-                            batch_size=BATCH_SIZE, 
+val_dataloader_damage = DataLoader(val_secondary_dataset_damage,
+                            batch_size=BATCH_SIZE,
                             shuffle=False,
                             num_workers=num_workers)
-test_dataloader_damage = DataLoader(test_secondary_dataset_damage, 
-                             batch_size=BATCH_SIZE, 
+test_dataloader_damage = DataLoader(test_secondary_dataset_damage,
+                             batch_size=BATCH_SIZE,
                              shuffle=False,
                              num_workers=num_workers)
