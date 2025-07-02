@@ -95,12 +95,12 @@ For each output, the green pixels represent an undamaged building, with each red
 
 - **[Ben Shaw](https://www.linkedin.com/in/bencshaw/)**
 
-<img src="streamlit/presentation_images/Ben.png" width="100" />
+<img src="streamlit/presentation_images/Ben.png" width="100" style="border-radius: 50%;/>
 
 - **[Christian Miro](https://www.linkedin.com/in/christianmiro)**
 
-<img src="streamlit/presentation_images/Christian.jpeg" width="100" />
+<img src="streamlit/presentation_images/Christian.jpeg" width="100" style="border-radius: 50%; />
 
 - **[Felix Pless](https://www.linkedin.com/in/felixpless)**
 
-<img src="streamlit/presentation_images/Felix.jpg" width="100" />
+<img src="streamlit/presentation_images/Felix.jpg" width="100" style="border-radius: 50%; />
