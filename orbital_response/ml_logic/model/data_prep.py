@@ -20,7 +20,7 @@ class MaskTransformDamage:
         mask_np = np.array(mask)
         mask_bin = (mask_np > 2).astype(np.uint8)
         return torch.from_numpy(mask_bin).long()
-    
+
 mask_transform = MaskTransform(size=(1024, 1024))
 mask_transform = MaskTransformDamage(size=(1024, 1024))
 
@@ -63,6 +63,7 @@ class SecondaryDataset(Dataset):
             mask = torch.zeros((1024, 1024), dtype=torch.long)  # Fallback
 
         return image, mask
+
 class SecondaryDatasetDamage(Dataset):
     def __init__(self, root_dir, mask_transform=None, include_building_mask=True):
         self.image_dir = os.path.join(root_dir, "images")
@@ -154,7 +155,7 @@ class AugmentedSecondaryCropDataset(Dataset):
             A.RandomBrightnessContrast(p=0.16),
             A.GaussianBlur(p=0.11),
         ])
-        
+
         ############### NEEDED SINCE THE ORIGINAL MODEL WAS NORMALIZED #############
         self.to_tensor = A.Compose([
             A.Normalize(
@@ -200,6 +201,7 @@ class AugmentedSecondaryCropDataset(Dataset):
         # Fallback (last crop without checking ratio %)
         final = self.to_tensor(image=img_crop, mask=mask_crop)
         return final["image"], final["mask"].long()
+
 class AugmentedSecondaryCropDatasetDamage(Dataset):
     def __init__(self, image_dir, mask_dir, building_mask_dir, crop_size=(224, 224), min_ratio=0.3, max_attempts=40):
         self.image_dir = image_dir
@@ -270,7 +272,7 @@ class AugmentedSecondaryCropDatasetDamage(Dataset):
 
             damage_in_building = (mask_crop == 1) * (building_mask_original_binary_crop == 1)
             total_building_pixels_in_crop = np.sum(building_mask_original_binary_crop)
-            
+
             # no div cero
             if total_building_pixels_in_crop > 0:
                 ratio = np.sum(damage_in_building) / total_building_pixels_in_crop
@@ -283,7 +285,7 @@ class AugmentedSecondaryCropDatasetDamage(Dataset):
                 aug_mask = augmented["mask"]
 
                 final_transformed = self.to_tensor_and_normalize(image=aug_image, mask=aug_mask)
-        
+
                 return final_transformed["image"], final_transformed["mask"].long(), torch.from_numpy(building_mask_original_binary_crop).float()
 
         top = random.randint(0, h - ch)
@@ -298,4 +300,3 @@ class AugmentedSecondaryCropDatasetDamage(Dataset):
 
         final_transformed = self.to_tensor_and_normalize(image=aug_image, mask=aug_mask)
         return final_transformed["image"], final_transformed["mask"].long(), torch.from_numpy(building_mask_original_binary_crop).float()
-
