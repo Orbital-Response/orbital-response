@@ -20,13 +20,12 @@ The next development will link this building damage to a population density mapp
 
 The dataset consists of 150 manually labelled satellite images, each approximately 300m² in size and 1024x1024 pixels in resolution. These images were extracted from six core areas of building destruction across the Gaza Strip, focusing on key regions affected by conflict.
 
-![secondary_image_unlabelled.png](streamlit/presentation_images/secondary_image_unlabelled.png)
+<p float="left">
+  <img src="streamlit/presentation_images/secondary_image_unlabelled.png" width="600" />
+  <img src="streamlit/presentation_images/secondary_image_labelled.png" width="600" />
+</p>
 
-*Post-strike satellite image*
-
-![secondary_image_labelled.png](streamlit/presentation_images/secondary_image_labelled.png)
-
-*Labelled satellite image (Roboflow)*
+*Post-strike satellite image* | *Labelled satellite image (Roboflow)*
 
 ## Model Architecture
 
@@ -48,17 +47,16 @@ By overlaying this segmentation mask onto the post-disaster image, the system ge
 
 An additional **Ultralytics YOLOv11 segmentation model** was fine-tuned on the custom dataset and used as a baseline for evaluating the performance of the U-Net model.
 
-![unet_model_architecture.png](streamlit/presentation_images/unet_model_architecture.png)
+<img src="streamlit/presentation_images/unet_model_architecture.png" width="600" />
 
 *U-Net Architecture*
 
-![building_mask.png](streamlit/presentation_images/building_mask.png)
+<p float="left">
+  <img src="streamlit/presentation_images/building_mask.png" width="400" />
+  <img src="streamlit/presentation_images/building_damage.png" width="400" />
+</p>
 
-*Building Localisation Mask*
-
-![building_damage.png](streamlit/presentation_images/building_damage.png)
-
-*Damage Classification Output*
+*Building Localisation Mask* | *Damage Classification Output*
 
 ## Damage Assessment Mapping
 
@@ -69,11 +67,11 @@ The platform requires a singular input – the coordinates (latitude, longitude)
 
 These images will then be concatenated and fed to both the U-Net architecture and the Ultralytics YOLOv11 model. The outputs of each are shown below:
 
-![prediction_page.png](streamlit/presentation_images/prediction_page.png)
+<img src="streamlit/presentation_images/prediction_page.png" width="600" />
 
 *Pre vs Post Disaster Images / Ultralytics YOLOv11 Model Output*
 
-![orbital_response_output.png](streamlit/presentation_images/orbital_response_output.png)
+<img src="streamlit/presentation_images/orbital_response_output.png" width="600" />
 
 *Orbital Response (U-Net) Model Output*
 
@@ -97,12 +95,12 @@ For each output, the green pixels represent an undamaged building, with each red
 
 - **[Ben Shaw]**
 
-![Ben.png](streamlit/presentation_images/Ben.png)
+<img src="streamlit/presentation_images/Ben.png" width="200" />
 
 - **[Christian Miro]**
 
-![Christian.jpeg](streamlit/presentation_images/Christian.jpeg)
+<img src="streamlit/presentation_images/Christian.jpeg" width="200" />
 
 - **[Felix Pless]**
 
-![Felix.jpg](streamlit/presentation_images/Felix.jpg)
+<img src="streamlit/presentation_images/Felix.jpg" width="200" />
