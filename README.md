@@ -20,10 +20,10 @@ The next development will link this building damage to a population density mapp
 
 The dataset consists of 150 manually labelled satellite images, each approximately 300m² in size and 1024x1024 pixels in resolution. These images were extracted from six core areas of building destruction across the Gaza Strip, focusing on key regions affected by conflict.
 
-<div style="display: flex; justify-content: space-between;">
-  <img src="streamlit/presentation_images/secondary_image_unlabelled.png" width="600" />
-  <img src="streamlit/presentation_images/secondary_image_labelled.png" width="600" />
-</div>
+<p float="left">
+  <img src="streamlit/presentation_images/secondary_image_unlabelled.png" width="400" />
+  <img src="streamlit/presentation_images/secondary_image_labelled.png" width="400" />
+</p>
 
 *Post-strike satellite image* | *Labelled satellite image (Roboflow)*
 
@@ -47,7 +47,7 @@ By overlaying this segmentation mask onto the post-disaster image, the system ge
 
 An additional **Ultralytics YOLOv11 segmentation model** was fine-tuned on the custom dataset and used as a baseline for evaluating the performance of the U-Net model.
 
-<img src="streamlit/presentation_images/unet_model_architecture.png" width="600" />
+<img src="streamlit/presentation_images/unet_model_architecture.png" width="800" />
 
 *U-Net Architecture*
 
