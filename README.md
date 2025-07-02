@@ -67,11 +67,11 @@ The platform requires a singular input – the coordinates (latitude, longitude)
 
 These images will then be concatenated and fed to both the U-Net architecture and the Ultralytics YOLOv11 model. The outputs of each are shown below:
 
-<img src="streamlit/presentation_images/prediction_page.png" width="600" />
+<img src="streamlit/presentation_images/prediction_page.png" width="800" />
 
 *Pre vs Post Disaster Images / Ultralytics YOLOv11 Model Output*
 
-<img src="streamlit/presentation_images/orbital_response_output.png" width="600" />
+<img src="streamlit/presentation_images/orbital_response_output.png" width="800" />
 
 *Orbital Response (U-Net) Model Output*
 
@@ -93,14 +93,14 @@ For each output, the green pixels represent an undamaged building, with each red
 
 ## The Team
 
-- **[Ben Shaw]**
+- **[Ben Shaw](https://www.linkedin.com/in/bencshaw/)**
 
-<img src="streamlit/presentation_images/Ben.png" width="200" />
+<img src="streamlit/presentation_images/Ben.png" width="100" />
 
-- **[Christian Miro]**
+- **[Christian Miro](https://www.linkedin.com/in/christianmiro)**
 
-<img src="streamlit/presentation_images/Christian.jpeg" width="200" />
+<img src="streamlit/presentation_images/Christian.jpeg" width="100" />
 
-- **[Felix Pless]**
+- **[Felix Pless](https://www.linkedin.com/in/felixpless)**
 
-<img src="streamlit/presentation_images/Felix.jpg" width="200" />
+<img src="streamlit/presentation_images/Felix.jpg" width="100" />
