@@ -93,14 +93,14 @@ For each output, the green pixels represent an undamaged building, with each red
 
 ## The Team
 
-- **[Ben Shaw](https://www.linkedin.com/in/bencshaw/)**
+- **[Ben Shaw](https://www.linkedin.com/in/ben-shaw)**
 
-<img src="streamlit/presentation_images/Ben.png" width="100" style="border-radius: 50%;>
+<img src="streamlit/presentation_images/Ben.png" width="200" style="border-radius: 50%;" />
 
-- **[Christian Miro](https://www.linkedin.com/in/christianmiro)**
+- **[Christian Miro](https://www.linkedin.com/in/christian-miro)**
 
-<img src="streamlit/presentation_images/Christian.jpeg" width="100" style="border-radius: 50%;>
+<img src="streamlit/presentation_images/Christian.jpeg" width="200" style="border-radius: 50%;" />
 
-- **[Felix Pless](https://www.linkedin.com/in/felixpless)**
+- **[Felix Pless](https://www.linkedin.com/in/felix-pless)**
 
-<img src="streamlit/presentation_images/Felix.jpg" width="100" style="border-radius: 50%; >
+<img src="streamlit/presentation_images/Felix.jpg" width="200" style="border-radius: 50%;" />
