@@ -16,14 +16,14 @@ The next development will link this building damage to a population density mapp
 4. [Further Development](#further-development)
 5. [The Team](#the-team)
 
-## Dataset
+### Dataset
 
 The dataset consists of 150 manually labelled satellite images, each approximately 300m² in size and 1024x1024 pixels in resolution. These images were extracted from six core areas of building destruction across the Gaza Strip, focusing on key regions affected by conflict.
 
-<p float="left">
+<div style="display: flex; justify-content: space-between;">
   <img src="streamlit/presentation_images/secondary_image_unlabelled.png" width="600" />
   <img src="streamlit/presentation_images/secondary_image_labelled.png" width="600" />
-</p>
+</div>
 
 *Post-strike satellite image* | *Labelled satellite image (Roboflow)*
 
