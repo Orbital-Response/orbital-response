@@ -80,7 +80,7 @@ For each output, the green pixels represent an undamaged building, with each red
 ## Further Development
 
 1. **Improved Model Accuracy and Generalisation**
-   The current goal is to expand the dataset to 1000 manually labelled images (covering 25% of the Gaza Strip). Once this is achieved, the model will be generalized to additional conflict zones, starting with Ukraine. Collaborations with organizations like Maxar will provide higher resolution and more time-specific satellite imagery, significantly improving model accuracy.
+   The current goal is to expand the dataset to 1000 manually labelled images. Once this is achieved, the model will be generalized to additional conflict zones, starting with Ukraine. Collaborations with organizations like Maxar will provide higher resolution and more time-specific satellite imagery, significantly improving model accuracy.
 
 2. **Quantifying Specific Units of Humanitarian Aid**
    The next step is to incorporate a population density map to estimate the number of affected individuals based on each pixel's assigned damage classification. Using regression models, the following units of humanitarian aid will be predicted:
